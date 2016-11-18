@@ -32,7 +32,7 @@ void game_loop(Frame &game_map, Frame &viewport, Character &main_char, int ch) {
             game_map.add(main_char, main_char.row() + 1, main_char.col());
             viewport.center(main_char);
             viewport.refresh();
-        }else if (ch == 'l') {
+        }else if (ch == 'k') {
             game_map.add(main_char, main_char.row() - 1, main_char.col());
             viewport.center(main_char);
             viewport.refresh();
@@ -62,6 +62,9 @@ int main (int argc, char* argv[]) {
 
     // Fill screen test
     game_map.fill_window();
+
+    // Test header
+    scr.add("DEVELOPMENT BUILD");
 
     // Main loop
     game_loop(game_map, viewport, main_char, ch);
