@@ -14,7 +14,7 @@ Frame::Frame(int nr_rows, int nr_cols, int row_0, int col_0){
 Frame::Frame(Frame &sw, int nr_rows, int nr_cols, int row_0, int col_0){
     _has_super = TRUE;
     _super = sw.win();
-    _w = newwin(nr_rows, nr_cols, row_0, col_0);
+    _w = derwin(sw.win(), nr_rows, nr_cols, row_0, col_0);
     _height = nr_rows;
     _width  = nr_cols;
     _row = row_0;
@@ -100,20 +100,20 @@ void Frame::fill_window() {
     }
     // 1
     for (int y = 0; y < max_y; ++y) {
-        for (int x = max_x; x < max_x; ++x) {
-            mvwaddch(_w, y, x, '0');
+        for (int x = max_x; x < _width; ++x) {
+            mvwaddch(_w, y, x, '1');
         }
     }
     // 2
-    for (int y = max_y; y < max_y; ++y) {
+    for (int y = max_y; y < _height; ++y) {
         for (int x = 0; x < max_x; ++x) {
-            mvwaddch(_w, y, x, '0');
+            mvwaddch(_w, y, x, '2');
         }
     }
     // 3
-    for (int y = max_y; y < max_y; ++y) {
-        for (int x = max_x; x < max_x; ++x) {
-            mvwaddch(_w, y, x, '0');
+    for (int y = max_y; y < _height; ++y) {
+        for (int x = max_x; x < _width; ++x) {
+            mvwaddch(_w, y, x, '3');
         }
     }
 
