@@ -89,6 +89,34 @@ void Frame::move(int r, int c) {
     }
 }
 
+void Frame::gen_perlin(const unsigned int &seed) {
+    PerlinNoise pn(seed);
+
+    for (int i=0; i < _height; i++) {
+        for (int j=0; j < _width; j++) {
+            double x = (double)j/((double) _width);
+            double y = (double)i/((double) _height);
+            
+            double n = pn.noise(10*x, 10*y, 0.8);
+
+            if (n<0.35) {
+            // Water
+                mvwaddch(_w, i, j, WATER_CHAR);
+            } else if (n >= 0.35 && n < 0.6) {
+            // Floor
+                mvwaddch(_w, i, j, FLOOR_CHAR);
+            } else if (n >= 0.6) {
+            // Walls
+                mvwaddch(_w, i, j, WALL_CHAR);
+            } else {
+            // Ice
+                mvwaddch(_w, i, j, ICE_CHAR);
+            }
+        }
+    }
+
+}
+ 
 void Frame::fill_window() {
     int max_x = _width / 2;
     int max_y = _height / 2;

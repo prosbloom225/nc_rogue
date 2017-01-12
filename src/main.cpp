@@ -61,7 +61,8 @@ int main (int argc, char* argv[]) {
     Character main_char('@', game_map.height()/2, game_map.width()/2);
 
     // Fill screen test
-    game_map.fill_window();
+    /* game_map.fill_window(); */
+    game_map.gen_perlin(237);
 
     // Test header
     scr.add("DEVELOPMENT BUILD");

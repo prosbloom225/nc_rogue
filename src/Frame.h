@@ -3,6 +3,8 @@
 
 #include <ncurses.h>
 #include "Character.h"
+#include "PerlinNoise.h"
+#include "Constants.h"
 
 class Frame {
     int _height, _width;
@@ -40,6 +42,10 @@ class Frame {
     
     // Test - Fill window with a flat char
     void fill_window();
+
+
+    // gen_perlin - Fill window with water, floors, walls, and ice
+    void gen_perlin(const unsigned int &seed);
 
     // Getters
     WINDOW *win();
