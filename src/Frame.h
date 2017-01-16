@@ -1,7 +1,8 @@
 #ifndef FRAME_H
-#define FRAME_h
+#define FRAME_H
 
 #include <ncurses.h>
+#include <panel.h>
 #include "Character.h"
 #include "PerlinNoise.h"
 #include "Constants.h"

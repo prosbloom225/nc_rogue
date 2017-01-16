@@ -1,7 +1,7 @@
 #include "Screen.h"
 
-// Init ncurses
 Screen::Screen() {
+    // Init ncurses
     initscr();
     clear();
     noecho();
@@ -20,6 +20,7 @@ Screen::~Screen() {
 void Screen::add(const char *message) {
     printw(message);
 }
+
 
 // Getters
 int Screen::height() {

@@ -33,7 +33,7 @@ void Frame::add(Character &x) {
 
 void Frame::add(Character &x, int row_0, int col_0) {
     if ((row_0 >= 0 && row_0 < _height) && (col_0 >= 0 && col_0 < _width)) {
-        char target = mvwinch(_w, row_0, col_0);
+        char target = (char)mvwinch(_w, row_0, col_0);
         if (target == WALL_CHAR || target == WATER_CHAR || target == ICE_CHAR) {
             return;
         }
@@ -80,7 +80,9 @@ void Frame::refresh() {
     if (_has_super) {
         touchwin(_super);
     }
-    wrefresh(_w);
+    /* wrefresh(_w); */
+    update_panels();
+    doupdate();
 }
 
 
