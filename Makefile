@@ -1,7 +1,7 @@
 CC=g++
-CFLAGS=-std=c++11 -Wall -g
+CFLAGS=-std=c++11 -Wall -g 
 INC=-I.
-LIB=-lncurses
+LIB=-lncurses -lpanel -lmenu
 SRCDIR=src
 OBJDIR=obj
 TARGET=bin/main
