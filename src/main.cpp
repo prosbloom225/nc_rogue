@@ -1,3 +1,4 @@
+#include "dbg.h"
 #include <ncurses.h>
 #include <panel.h>
 #include "Constants.h"
@@ -10,18 +11,19 @@
 
 
 void game_loop(
-        Game *game,
-        Character &main_char,
+        Game &game,
         int ch) {
 
     if (ch == 'q' || ch == 'Q')
         return;
 
     // helpers
-    Frame game_map = *game->game_map();
-    Frame viewport = *game->viewport();
+    Screen &scr = *game.scr();
+    Frame &game_map = *game.game_map();
+    Frame &viewport = *game.viewport();
+    Character &main_char = *game.main_char();
 
-    game_map.add(main_char);
+    /* game_map.add(main_char); */
     viewport.center(main_char);
     viewport.refresh();
 
@@ -48,19 +50,13 @@ void game_loop(
             viewport.refresh();
             // Inventory
         }else if (ch == 'i') {
-            /*
-            hide_panel(main_panel);
-            top_panel(menu_panel);
-            update_panels();
-            doupdate();
-            // show the menu
-            char_inv->activate_menu();
+            scr.set_panel_window(PANEL_MENU, main_char.inv()->win());
+            scr.activate_panel(PANEL_MENU);
+            /* main_char.inv()->activate_menu(); */
+            getch();
 
-            hide_panel(menu_panel);
-            top_panel(main_panel);
-            update_panels();
-            doupdate();
-            */
+            scr.activate_panel(PANEL_MAIN);
+
 
         } else if (ch == 'q' || ch == 'Q') {
             break;
@@ -73,49 +69,30 @@ int main (int argc, char* argv[]) {
     Game *game = new Game();
 
     // helper
-    Screen scr = *game->scr();
     Frame game_map = *game->game_map();
     Frame viewport = *game->viewport();
 
-    scr.add("Welcome to nc_rogue.\nPress any key to start.\n");
+    game->scr()->add("Welcome to nc_rogue.\nPress any key to start.\n");
     // Wait for user input to start
     int ch = getch();
 
-    /*
-
-    // Game map
-    // Main viewport
-    Frame game_map2(2 * scr->height(), 2 * scr->width(), 0, 0);
-    Frame viewport2(*game_map, scr->height(), scr->width(), 0, 0);
-
-    // testing panels
-    // Inventory
-    Inventory inv(scr.height()/3, scr.width()/3, 0, 0);
+    game->scr()->set_panel_window(PANEL_MAIN, viewport.win());
     
-    PANEL *main_panel = new_panel(viewport.win());
-    PANEL *menu_panel  = new_panel(inv.win());
-
-    set_panel_userptr(main_panel, menu_panel);
-    game_map.fill_window();
-    top_panel(menu_panel);
-
-    */
-
 
     // Init main char and dump in the middle
     Character main_char('@', game_map.height()/2, game_map.width()/2);
 
     // Fill screen test
-    game_map.fill_window();
-    /* game_map->gen_perlin(237); */
+    /* game_map.fill_window(); */
+    game_map.gen_perlin(237);
 
     // Dev header
-    scr.add("DEVELOPMENT BUILD");
-    viewport.refresh();
+    game->scr()->add("DEVELOPMENT BUILD");
 
     // Main loop
-    game_loop(game, main_char, ch);
+    game_loop(*game, ch);
 
     // Clean up 
+    game->~Game();
     return 0;
 }

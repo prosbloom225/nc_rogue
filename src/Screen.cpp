@@ -10,6 +10,14 @@ Screen::Screen() {
     curs_set(0);
     // Get dims
     getmaxyx(stdscr, _height, _width);
+    
+    curr_panel = 0;
+}
+
+
+PANEL *Screen::set_panel_window(int p, WINDOW *win) {
+    _panels[p] = new_panel(win);
+    return _panels[p];
 }
 
 // Dealloc
@@ -19,6 +27,18 @@ Screen::~Screen() {
 
 void Screen::add(const char *message) {
     printw(message);
+}
+
+void Screen::activate_panel(int p) {
+    log_info("activating panel: %d", p);
+    log_info("hiding panel: %d", curr_panel);
+    hide_panel(_panels[curr_panel]);
+    PANEL *new_panel = _panels[p];
+    new_panel = (PANEL *)panel_userptr(new_panel);
+    top_panel(_panels[p]);
+    curr_panel = p;
+    update_panels();
+    doupdate();
 }
 
 
