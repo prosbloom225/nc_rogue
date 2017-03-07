@@ -22,6 +22,7 @@ class Screen {
 
     void add(const char *message);
     void activate_panel(int p);
+    void srefresh();
 
     // setters
     PANEL *set_panel_window(int p, WINDOW *win);

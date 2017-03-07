@@ -2,11 +2,14 @@
 #define INVENTORY_H
 
 #include <ncurses.h>
+#include <panel.h>
 #include <menu.h>
 #include <stdlib.h>
+#include "dbg.h"
 
 class Inventory {
     WINDOW *_w;
+    int _nr_rows, _nr_cols, _row_0, _col_0;
 
     public:
     Inventory();
@@ -16,6 +19,12 @@ class Inventory {
 
     ~Inventory();
     WINDOW *win();
+
+    int get_nr_rows();
+    int get_nr_cols();
+    int get_row_0;
+    int get_col_0;
+
 };
 
 

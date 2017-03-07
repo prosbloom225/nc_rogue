@@ -1,26 +1,22 @@
 #include "Inventory.h"
 
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
-#define CTRLD 	4
 
 char *inv_items[] = {
-                        "item 1",
-                        "item 2",
-                        "item 3",
-                        "item 4",
-                        "Exit",
-                        (char *)NULL,
-                  };
+    "item1",
+    "item2"
+};
 
 // Constructor
 Inventory::Inventory() {
-    _w = newwin(50, 50, 10, 10);
-    box(_w, '*', '*');
+    _w = newwin(50, 50, 7, 7);
 }
-
 Inventory::Inventory(int nr_rows, int nr_cols, int row_0, int col_0){
+    _nr_rows = nr_rows;
+    _nr_cols = nr_cols;
+    _row_0 = row_0;
+    _col_0 = col_0;
     _w = newwin(nr_rows, nr_cols, row_0, col_0);
-    box(_w, '*', '*');
 }
 
 // Dealloc
@@ -31,40 +27,23 @@ Inventory::~Inventory(){
 
 // Menu
 void Inventory::activate_menu() {
-    ITEM **my_items;
-    int c;				
-    MENU *my_menu;
-    int n_inv_items, i;
+    log_info("Opening inventory");
 
-    n_inv_items = ARRAY_SIZE(inv_items);
-    my_items = (ITEM **)calloc(n_inv_items + 1, sizeof(ITEM *));
+    mvwprintw(_w, 1, 2, "TEST");
+    box(_w, '*', '*');
+    // Menu
+    //
+    //
+    log_info("Inventory has: %lu items", ARRAY_SIZE(inv_items));
+    // display the items
+    for (int i= 0 ; i <= sizeof(inv_items); i++) {
+        int curr_row = i + get_row_0;
+        mvwprintw(_w, curr_row, 2, inv_items[i]);
+    }
 
-    for(i = 0; i < n_inv_items; ++i)
-        my_items[i] = new_item(inv_items[i], inv_items[i]);
-
-    // Generate menu
-    my_menu = new_menu((ITEM **)my_items);
-    set_menu_win(my_menu, _w);
-    set_menu_sub(my_menu, derwin(_w, 6, 38, 3, 1));   my_items[n_inv_items] = (ITEM *)NULL;
-
-    mvprintw(LINES - 2, 0, "q to exit");
-    post_menu(my_menu);
-    refresh();
-
-    while((c = getch()) != 'q')
-    {   switch(c)
-        {	case 'j':
-            menu_driver(my_menu, REQ_DOWN_ITEM);
-            break;
-            case 'k':
-            menu_driver(my_menu, REQ_UP_ITEM);
-            break;
-        }
-    }	
-    free_item(my_items[0]);
-    free_item(my_items[1]);
-    free_menu(my_menu);
-    /* free(_w); */
+    update_panels();
+    doupdate();
+    getch();
 }
 
 

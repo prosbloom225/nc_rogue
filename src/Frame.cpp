@@ -80,7 +80,6 @@ void Frame::refresh() {
     if (_has_super) {
         touchwin(_super);
     }
-    /* wrefresh(_w); */
     update_panels();
     doupdate();
 }

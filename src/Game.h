@@ -23,6 +23,9 @@ class Game{
     Frame *viewport();
 
     Character *main_char();
+
+
+    void game_loop( Game &game, int ch);
 };
 
 #endif
