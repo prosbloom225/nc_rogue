@@ -5,7 +5,6 @@
 
 // Constructor
 Inventory::Inventory() {
-    items = *new std::vector<std::string>();
     items.push_back("test1");
 }
 
