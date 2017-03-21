@@ -1,8 +1,9 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "Screen.h"
 #include <stdlib.h>
+#include <vector>
+#include "Screen.h"
 #include "Inventory.h"
 
 class Game{ 

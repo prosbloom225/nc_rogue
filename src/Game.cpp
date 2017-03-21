@@ -67,6 +67,9 @@ void Game::game_loop( Game &game, int ch) {
     while (1) {
         ch = getch();
 
+        /* log_info("%d", ch); */
+        log_info("Key pressed: %d\n", ch);
+
         // Movement
         if (ch == 'h') {
             game_map.add(main_char, main_char.row(), main_char.col() - 1);
@@ -86,11 +89,15 @@ void Game::game_loop( Game &game, int ch) {
             viewport.refresh();
             // Inventory
         }else if (ch == 'i') {
-            scr.set_panel_window(PANEL_MENU, main_char.inv()->win());
-            scr.activate_panel(PANEL_MENU);
-            main_char.inv()->activate_menu();
+            /* scr.set_panel_window(PANEL_MENU, main_char.inv()->win()); */
+            /* scr.activate_panel(PANEL_MENU); */
+            /* main_char.inv()->activate_menu(); */
 
-            scr.activate_panel(PANEL_MAIN);
+            /* scr.activate_panel(PANEL_MAIN); */
+            Inventory *a = new Inventory();
+            std::vector<std::string> *b = a->get_items();
+            log_info("%s",b->at(0).c_str());
+
 
 
         } else if (ch == 'q' || ch == 'Q') {

@@ -31,7 +31,7 @@ int main (int argc, char* argv[]) {
 
     // Fill screen test
     /* game_map.fill_window(); */
-    game_map.gen_perlin(237);
+    /* game_map.gen_perlin(237); */
 
     // Dev header
     game->scr()->add("DEVELOPMENT BUILD");

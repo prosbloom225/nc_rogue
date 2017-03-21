@@ -32,11 +32,9 @@ void Screen::add(const char *message) {
 void Screen::activate_panel(int p) {
     log_info("activating panel: %d", p);
     log_info("hiding panel: %d", curr_panel);
-    hide_panel(_panels[curr_panel]);
-    /* PANEL *new_panel = _panels[p]; */
-    /* new_panel = (PANEL *)panel_userptr(new_panel); */
-    show_panel(_panels[p]);
-    top_panel(_panels[p]);
+    /* hide_panel(_panels[curr_panel]); */
+    /* show_panel(_panels[p]); */
+    /* top_panel(_panels[p]); */
     curr_panel = p;
     srefresh();
 }
