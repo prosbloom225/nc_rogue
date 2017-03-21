@@ -1,6 +1,11 @@
 #include "Screen.h"
 
-Screen::Screen() {
+int Screen::height = 0;
+int Screen::width = 0;
+int Screen::curr_panel = 0;
+PANEL *Screen::panels[2];
+
+void Screen::init() {
     // Init ncurses
     initscr();
     clear();
@@ -9,19 +14,19 @@ Screen::Screen() {
     keypad(stdscr, TRUE);
     curs_set(0);
     // Get dims
-    getmaxyx(stdscr, _height, _width);
+    getmaxyx(stdscr, Screen::height, Screen::width);
+    Screen::curr_panel = 0;
     
-    curr_panel = 0;
 }
 
 
 PANEL *Screen::set_panel_window(int p, WINDOW *win) {
-    _panels[p] = new_panel(win);
-    return _panels[p];
+    Screen::panels[p] = new_panel(win);
+    return panels[p];
 }
 
 // Dealloc
-Screen::~Screen() {
+void Screen::deinit() {
     endwin();
 }
 
@@ -32,9 +37,9 @@ void Screen::add(const char *message) {
 void Screen::activate_panel(int p) {
     log_info("hiding panel: %d", curr_panel);
     log_info("activating panel: %d", p);
-    hide_panel(_panels[curr_panel]);
-    show_panel(_panels[p]);
-    top_panel(_panels[p]);
+    hide_panel(panels[curr_panel]);
+    show_panel(panels[p]);
+    top_panel(panels[p]);
     curr_panel = p;
     srefresh();
 }
@@ -46,9 +51,9 @@ void Screen::srefresh() {
 
 
 // Getters
-int Screen::height() {
-    return _height;
+int Screen::getHeight() {
+    return height;
 }
-int Screen::width() {
-    return _width;
+int Screen::getWidth() {
+    return width;
 }
