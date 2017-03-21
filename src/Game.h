@@ -5,6 +5,7 @@
 #include <vector>
 #include "Screen.h"
 #include "Inventory.h"
+#include "InventoryView.h"
 
 class Game{ 
     Screen *_scr;

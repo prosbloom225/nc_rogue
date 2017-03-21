@@ -89,13 +89,14 @@ void Game::game_loop( Game &game, int ch) {
             viewport.refresh();
             // Inventory
         }else if (ch == 'i') {
+            // create inventory view for the specified character
+            InventoryView::activate_inventory(true, main_char.inv());
             /* scr.set_panel_window(PANEL_MENU, main_char.inv()->win()); */
             /* scr.activate_panel(PANEL_MENU); */
             /* main_char.inv()->activate_menu(); */
 
             /* scr.activate_panel(PANEL_MAIN); */
-            Inventory *a = new Inventory();
-            std::vector<std::string> *b = a->get_items();
+            std::vector<std::string> *b = main_char.inv()->get_items();
             log_info("%s",b->at(0).c_str());
 
 

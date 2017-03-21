@@ -5,11 +5,13 @@
 #include <ncurses.h>
 
 class InventoryView {
-    public:
-        static void activate_inventory(IInventory *inventory);
     private:
         static WINDOW *generate_window();
         static void activate_menu(IInventory *inventory);
+
+    public:
+
+        static void activate_inventory(bool isPlayer, IInventory *inventory);
 };
 
 
