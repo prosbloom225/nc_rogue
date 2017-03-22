@@ -9,28 +9,28 @@
 
 
 class Screen {
-    int _height, _width;
+    static int height, width;
 
-    PANEL *_panels[2];
-    int curr_panel;
+    static PANEL *panels[2];
+    static int curr_panel;
 
 
     public:
-    Screen();
-    ~Screen();
+    static void init();
+    static void deinit();
 
 
-    void add(const char *message);
-    void activate_panel(int p);
-    void srefresh();
+    static void add(const char *message);
+    static void activate_panel(int p);
+    static void srefresh();
 
     // setters
-    PANEL *set_panel_window(int p, WINDOW *win);
+    static PANEL *set_panel_window(int p, WINDOW *win);
 
 
     // getters
-    int width();
-    int height();
+    static int getWidth();
+    static int getHeight();
 
 
 };
