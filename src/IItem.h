@@ -11,7 +11,7 @@ class IItem {
 
 
     public:
-        virtual ~IInventory() = default;
+        virtual ~IItem() = default;
 
 
         // getters
