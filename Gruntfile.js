@@ -15,7 +15,7 @@ module.exports = function(grunt) {
                 command: 'make clean',
             },
             execute: {
-                command: 'bin/main',
+                command: 'bin/main 2&> out.log',
             },
             test: {
                 command: "echo TEST COMPLETE",

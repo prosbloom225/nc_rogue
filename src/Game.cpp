@@ -3,26 +3,26 @@
 
 // constructor
 Game::Game() {
-    _scr = new Screen();
+    Screen::init();
 
     // Set up game map
     //
     // Game map
-    _game_map = new Frame(2 * _scr->height(), 2 * _scr->width(), 0, 0);
+    _game_map = new Frame(2 * Screen::getHeight(), 2 * Screen::getWidth(), 0, 0);
     // Main viewport
-    _viewport = new Frame(*_game_map, _scr->height(), _scr->width(), 0, 0);
+    _viewport = new Frame(*_game_map, Screen::getHeight(), Screen::getWidth(), 0, 0);
     _scr->set_panel_window(PANEL_MAIN, _viewport->win());
 
     _main_char = new Character('@', _game_map->height()/2, _game_map->width()/2);
     _game_map->add(*_main_char);
 
-    _scr->activate_panel(0);
+    Screen::activate_panel(0);
 }
 
 // dealloc
 Game::~Game() {
     endwin();
-    free(_scr);
+    Screen::deinit();
     free(_game_map);
     free(_viewport);
     free(_main_char);
@@ -67,6 +67,9 @@ void Game::game_loop( Game &game, int ch) {
     while (1) {
         ch = getch();
 
+        /* log_info("%d", ch); */
+        log_info("Key pressed: %d\n", ch);
+
         // Movement
         if (ch == 'h') {
             game_map.add(main_char, main_char.row(), main_char.col() - 1);
@@ -86,11 +89,16 @@ void Game::game_loop( Game &game, int ch) {
             viewport.refresh();
             // Inventory
         }else if (ch == 'i') {
-            scr.set_panel_window(PANEL_MENU, main_char.inv()->win());
-            scr.activate_panel(PANEL_MENU);
-            main_char.inv()->activate_menu();
+            // create inventory view for the specified character
+            InventoryView::activate_inventory(true, main_char.inv());
+            /* scr.set_panel_window(PANEL_MENU, main_char.inv()->win()); */
+            /* scr.activate_panel(PANEL_MENU); */
+            /* main_char.inv()->activate_menu(); */
 
-            scr.activate_panel(PANEL_MAIN);
+            /* scr.activate_panel(PANEL_MAIN); */
+            std::vector<std::string> *b = main_char.inv()->get_items();
+            log_info("%s",b->at(0).c_str());
+
 
 
         } else if (ch == 'q' || ch == 'Q') {
