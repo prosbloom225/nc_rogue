@@ -2,6 +2,7 @@
 #define INVENTORYVIEW_H
 
 #include "IInventory.h"
+#include "Screen.h"
 #include <ncurses.h>
 
 class InventoryView {
