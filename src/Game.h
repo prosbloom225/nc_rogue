@@ -8,23 +8,24 @@
 #include "InventoryView.h"
 
 class Game{ 
-    Screen *_scr;
 
-    Frame *_game_map;
-    Frame *_viewport;
+    Frame *game_map;
+    Frame *viewport;
 
-    Character *_main_char;
+    Character *main_char;
+
+    void pre_init();
+    void init();
+    void post_init();
 
     public:
     Game();
     ~Game();
 
     // getters
-    Screen *scr();
-    Frame *game_map();
-    Frame *viewport();
-
-    Character *main_char();
+    Frame *get_game_map();
+    Frame *get_viewport();
+    Character *get_main_char();
 
 
     void game_loop( Game &game, int ch);

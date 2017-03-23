@@ -3,19 +3,20 @@
 
 // constructor
 Game::Game() {
-    Screen::init();
+    pre_init();
+    init();
+    post_init();
 
     // Set up game map
     //
     // Game map
-    _game_map = new Frame(2 * Screen::getHeight(), 2 * Screen::getWidth(), 0, 0);
+    game_map = new Frame(2 * Screen::getHeight(), 2 * Screen::getWidth(), 0, 0);
     // Main viewport
-    _viewport = new Frame(*_game_map, Screen::getHeight(), Screen::getWidth(), 0, 0);
-    _scr->set_panel_window(PANEL_MAIN, _viewport->win());
+    viewport = new Frame(*game_map, Screen::getHeight(), Screen::getWidth(), 0, 0);
+    Screen::set_panel_window(PANEL_MAIN, viewport->win());
 
-    _main_char = new Character('@', _game_map->height()/2, _game_map->width()/2);
-    _game_map->add(*_main_char);
-
+    main_char = new Character('@', game_map->height()/2, game_map->width()/2);
+    game_map->add(*main_char);
     Screen::activate_panel(0);
 }
 
@@ -23,26 +24,30 @@ Game::Game() {
 Game::~Game() {
     endwin();
     Screen::deinit();
-    free(_game_map);
-    free(_viewport);
-    free(_main_char);
+    free(game_map);
+    free(viewport);
+    free(main_char);
 }
+
+// init
+void Game::pre_init(){
+    Screen::init();
+}
+void Game::init(){}
+void Game::post_init(){}
 
 // getters
-Screen *Game::scr() {
-    return _scr;
+
+Frame *Game::get_viewport() {
+    return viewport;
 }
 
-Frame *Game::viewport() {
-    return _viewport;
+Frame *Game::get_game_map() {
+    return game_map;
 }
 
-Frame *Game::game_map() {
-    return _game_map;
-}
-
-Character *Game::main_char(){
-    return _main_char;
+Character *Game::get_main_char(){
+    return main_char;
 }
 
 
@@ -54,10 +59,9 @@ void Game::game_loop( Game &game, int ch) {
         return;
 
     // helpers
-    Screen &scr = *game.scr();
-    Frame &game_map = *game.game_map();
-    Frame &viewport = *game.viewport();
-    Character &main_char = *game.main_char();
+    Frame &game_map = *game.get_game_map();
+    Frame &viewport = *game.get_viewport();
+    Character &main_char = *game.get_main_char();
 
     /* game_map.add(main_char); */
     viewport.center(main_char);
