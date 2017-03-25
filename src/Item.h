@@ -1,12 +1,12 @@
-#ifndef INVENTORY_H
-#define INVENTORY_H
+#ifndef ITEM_H
+#define ITEM_H
 
-#include  "IItem.h"
 #include "dbg.h"
+#include <string>
 
-class Item : public IItem {
+class Item {
     private:
-        int id;
+        const int id;
         std::string *name;
 
 
@@ -18,8 +18,7 @@ class Item : public IItem {
 
         // getters
         std::string *get_name() { return name; };
-        int get_itemId() { return id; };
-
+        int get_itemId() const { return id; };
 
 };
 
