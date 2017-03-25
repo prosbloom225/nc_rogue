@@ -6,6 +6,7 @@
 #include "Screen.h"
 #include "Inventory.h"
 #include "InventoryView.h"
+#include "registries/ItemRegistry.h"
 
 class Game{ 
 

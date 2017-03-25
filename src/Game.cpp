@@ -1,4 +1,6 @@
 #include "Game.h"
+#include "registries/ItemRegistry.h"
+#include "registries/ItemLoader.h"
 
 
 // constructor
@@ -7,17 +9,6 @@ Game::Game() {
     init();
     post_init();
 
-    // Set up game map
-    //
-    // Game map
-    game_map = new Frame(2 * Screen::getHeight(), 2 * Screen::getWidth(), 0, 0);
-    // Main viewport
-    viewport = new Frame(*game_map, Screen::getHeight(), Screen::getWidth(), 0, 0);
-    Screen::set_panel_window(PANEL_MAIN, viewport->win());
-
-    main_char = new Character('@', game_map->height()/2, game_map->width()/2);
-    game_map->add(*main_char);
-    Screen::activate_panel(0);
 }
 
 // dealloc
@@ -33,7 +24,22 @@ Game::~Game() {
 void Game::pre_init(){
     Screen::init();
 }
-void Game::init(){}
+void Game::init(){
+    // Set up game map
+    //
+    // Game map
+    game_map = new Frame(2 * Screen::getHeight(), 2 * Screen::getWidth(), 0, 0);
+    // Main viewport
+    viewport = new Frame(*game_map, Screen::getHeight(), Screen::getWidth(), 0, 0);
+    Screen::set_panel_window(PANEL_MAIN, viewport->win());
+
+    main_char = new Character('@', game_map->height()/2, game_map->width()/2);
+    game_map->add(*main_char);
+    Screen::activate_panel(0);
+
+    // add test items
+    ItemLoader::init_items();
+}
 void Game::post_init(){}
 
 // getters
