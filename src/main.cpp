@@ -17,9 +17,9 @@ int main (int argc, char* argv[]) {
     Game *game = new Game();
 
     // helper
-    Frame game_map = *game->game_map();
+    Frame game_map = *game->get_game_map();
 
-    game->scr()->add("Welcome to nc_rogue.\nPress any key to start.\n");
+    Screen::add("Welcome to nc_rogue.\nPress any key to start.\n");
     // Wait for user input to start
     int ch = getch();
 
@@ -30,7 +30,7 @@ int main (int argc, char* argv[]) {
     /* game_map.gen_perlin(237); */
 
     // Dev header
-    game->scr()->add("DEVELOPMENT BUILD");
+    Screen::add("DEVELOPMENT BUILD");
 
     // Main loop
     game->game_loop(*game, ch);
