@@ -11,7 +11,6 @@ class Item {
 
 
     public:
-        Item();
         Item(int itemId, std::string *itemName);
         ~Item();
 

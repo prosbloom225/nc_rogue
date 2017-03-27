@@ -1,6 +1,5 @@
 #include "Item.h"
 
-Item::Item(){}
 
 Item::Item(int itemId, std::string *itemName){
     id = itemId;
