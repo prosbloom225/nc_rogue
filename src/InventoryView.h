@@ -8,7 +8,7 @@
 class InventoryView {
     private:
         static WINDOW *generate_window();
-        static void activate_menu(IInventory *inventory);
+        static void activate_menu(WINDOW *win, IInventory *inventory);
 
     public:
 

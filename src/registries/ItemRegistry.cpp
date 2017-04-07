@@ -1,10 +1,11 @@
 #include "ItemRegistry.h"
 
-std::set<Item, itemComp> ItemRegistry::registry;
+std::map<std::string*, Item*> ItemRegistry::registry;
 
 bool ItemRegistry::register_item(Item *item){ 
-    debug("%s", item->get_name()->c_str());
-    registry.insert(*item);
+    debug("%s", item->get_id()->c_str());
+    /* registry.insert(std::make_pair(item->get_id(), item)); */
+    registry.emplace(new std::string("test"), item);
     // TODO - stub
     
     return true;
@@ -18,7 +19,12 @@ bool ItemRegistry::unregister_item(int itemId) {
 void ItemRegistry::dump_items() {
     debug("DUMPING ITEM REGISTRY");
     for (auto f : ItemRegistry::registry) {
-        debug("Id: %d - Name: %s",f.get_itemId(), f.get_name()->c_str());
+        debug("Id: %s - Name: %s",f.first->c_str(), f.second->get_name()->c_str());
     }
+}
+
+Item* ItemRegistry::get_item(int id) {
+    // TODO - full table scan - ick
+    return nullptr;
 }
 
