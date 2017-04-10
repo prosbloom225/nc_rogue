@@ -8,8 +8,8 @@
 
 void ItemLoader::init_items() {
     debug("Loading items....");
-    Item *testItem = new Item(new std::string(MODID), new std::string("testItem"));
-    Item *testItem2 = new Item(new std::string("base:testItem2"), new std::string("testItem2"));
+    Item *testItem = new Item(std::string(MODID), std::string("testItem"));
+    Item *testItem2 = new Item(std::string(MODID), std::string("testItem2"));
 
     ItemRegistry::register_item(testItem);
     ItemRegistry::register_item(testItem2);

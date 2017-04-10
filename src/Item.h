@@ -3,6 +3,7 @@
 
 #include "dbg.h"
 #include <string>
+#include "lib/LibMisc.h"
 
 class Item {
     private:
@@ -11,7 +12,7 @@ class Item {
 
 
     public:
-        Item(std::string *modid, std::string *itemName);
+        Item(std::string const& modid, std::string const& itemName);
         ~Item();
 
 
