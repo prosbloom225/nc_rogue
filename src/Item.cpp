@@ -1,8 +1,8 @@
 #include "Item.h"
 
 
-Item::Item(std::string *itemId, std::string *itemName){
-    id = itemId;
+Item::Item(std::string *modid, std::string *itemName){
+    id = new std::string(modid) + ":" + itemName;
     name = itemName;
     /* ItemRegistry::register_item(this); */
 

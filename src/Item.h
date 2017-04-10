@@ -11,7 +11,7 @@ class Item {
 
 
     public:
-        Item(std::string *itemId, std::string *itemName);
+        Item(std::string *modid, std::string *itemName);
         ~Item();
 
 

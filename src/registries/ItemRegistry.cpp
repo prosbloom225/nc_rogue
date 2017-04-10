@@ -5,7 +5,7 @@ std::map<std::string*, Item*> ItemRegistry::registry;
 bool ItemRegistry::register_item(Item *item){ 
     debug("%s", item->get_id()->c_str());
     /* registry.insert(std::make_pair(item->get_id(), item)); */
-    registry.emplace(new std::string("test"), item);
+    registry.emplace(item->get_id(), item);
     // TODO - stub
     
     return true;
