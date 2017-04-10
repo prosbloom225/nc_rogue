@@ -32,13 +32,16 @@ void Game::init(){
     // Main viewport
     viewport = new Frame(*game_map, Screen::getHeight(), Screen::getWidth(), 0, 0);
     Screen::set_panel_window(PANEL_MAIN, viewport->win());
-
-    main_char = new Character('@', game_map->height()/2, game_map->width()/2);
-    game_map->add(*main_char);
     Screen::activate_panel(0);
 
     // add test items
     ItemLoader::init_items();
+
+    // Initial Characters
+    main_char = new Character('@', game_map->height()/2, game_map->width()/2);
+    game_map->add(*main_char);
+
+
 }
 void Game::post_init(){}
 
@@ -106,8 +109,8 @@ void Game::game_loop( Game &game, int ch) {
             /* main_char.inv()->activate_menu(); */
 
             /* scr.activate_panel(PANEL_MAIN); */
-            std::vector<std::string> *b = main_char.inv()->get_items();
-            log_info("%s",b->at(0).c_str());
+            std::vector<Item> *b = main_char.inv()->get_items();
+            /* std::string c = b->at(0)->get_name(); */
 
 
 

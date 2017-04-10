@@ -2,16 +2,18 @@
 #define INVENTORY_H
 
 #include  "IInventory.h"
+#include  "Item.h"
+#include  "registries/ItemRegistry.h"
 
 class Inventory : public IInventory {
     private:
-        std::vector<std::string> items;
+        std::vector<Item> items;
 
     public:
         Inventory();
         ~Inventory();
 
-        std::vector<std::string> *get_items();
+        std::vector<Item> *get_items();
 
 
 };

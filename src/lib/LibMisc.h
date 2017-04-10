@@ -3,8 +3,5 @@
 
 #define MODID "nc_rogue"
 
-class LibMisc {
-    public:
-};
 
 #endif

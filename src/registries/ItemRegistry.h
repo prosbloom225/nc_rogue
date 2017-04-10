@@ -14,7 +14,7 @@ class ItemRegistry {
         static bool unregister_item(int itemId);
         static void dump_items();
 
-        static Item* get_item(int id);
+        static Item* get_item(std::string *id);
 
 
 };

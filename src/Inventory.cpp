@@ -5,14 +5,16 @@
 
 // Constructor
 Inventory::Inventory() {
-    items.push_back("test1");
+    // TODO - seeding initial player inventory
+    Item *a = ItemRegistry::get_item(new std::string("nc_rogue:testItem"));
+    /* debug("Seeding inventory with item: %s", a->get_name()->c_str()); */
 }
 
 // Dealloc
 Inventory::~Inventory(){
 }
 
-std::vector<std::string> *Inventory::get_items() {
+std::vector<Item> *Inventory::get_items() {
     return &items;
 }
 

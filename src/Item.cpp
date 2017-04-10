@@ -9,5 +9,3 @@ Item::Item(std::string const& modid, std::string const& itemName){
 }
 
 Item::~Item(){}
-
-

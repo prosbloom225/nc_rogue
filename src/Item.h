@@ -16,7 +16,7 @@ class Item {
 
 
         // getters
-        std::string *get_name() { return name; };
+        std::string *get_name() const { return name; };
         std::string *get_id() const { return id; };
 
 };

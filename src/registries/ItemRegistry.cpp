@@ -6,8 +6,7 @@ bool ItemRegistry::register_item(Item *item){
     debug("%s", item->get_id()->c_str());
     /* registry.insert(std::make_pair(item->get_id(), item)); */
     registry.emplace(item->get_id(), item);
-    // TODO - stub
-    
+    // TODO - return codes
     return true;
 } 
 bool ItemRegistry::unregister_item(int itemId) {
@@ -23,8 +22,12 @@ void ItemRegistry::dump_items() {
     }
 }
 
-Item* ItemRegistry::get_item(int id) {
+Item* ItemRegistry::get_item(std::string *id) {
     // TODO - full table scan - ick
-    return nullptr;
+
+    debug("Size of registry: %lu", ItemRegistry::registry.size());
+    Item *t= ItemRegistry::registry.find(id)->second;
+    return t;
+    /* return nullptr; */
 }
 
