@@ -1,8 +1,4 @@
 #include "ItemLoader.h"
-#include "ItemRegistry.h"
-#include "../Item.h"
-#include "../dbg.h"
-#include "../lib/LibMisc.h"
 
 #include <string>
 
