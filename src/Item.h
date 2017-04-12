@@ -5,7 +5,7 @@
 #include "lib/LibMisc.h"
 
 class Item {
-    private:
+    protected:
         std::string *id;
         std::string *name;
 
