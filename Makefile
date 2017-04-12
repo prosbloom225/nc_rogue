@@ -1,6 +1,6 @@
 CC=g++
-CFLAGS=-std=c++11 -Wall -g 
-INC=-I.
+CFLAGS=-std=c++11 -Wall -g  -Wno-unused-variable
+INC=-I./src
 LIB=-lncurses -lpanel -lmenu
 SRCDIR=src
 OBJDIR=obj

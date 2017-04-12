@@ -1,8 +1,8 @@
 #ifndef ITEMREGISTRY_H
 #define ITEMREGISTRY_H
 
-#include "../dbg.h"
-#include "../Item.h"
+#include "dbg.h"
+#include "Item.h"
 #include <map>
 
 class ItemRegistry {
