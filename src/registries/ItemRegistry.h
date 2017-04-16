@@ -7,7 +7,7 @@
 
 class ItemRegistry {
     private:
-        static std::map<std::string*, Item*> registry;
+        static std::map<std::string, Item*> registry;
 
     public:
         static bool register_item(Item *item);

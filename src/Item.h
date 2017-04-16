@@ -6,18 +6,18 @@
 
 class Item {
     private:
-        std::string *id;
-        std::string *name;
+        std::string id;
+        std::string name;
 
 
     public:
-        Item(std::string *modid, std::string *itemName);
+        Item(std::string modid, std::string itemName);
         ~Item();
 
 
         // getters
-        std::string *get_name() { return name; };
-        std::string *get_id() const { return id; };
+        std::string get_name() { return name; };
+        std::string get_id() const { return id; };
 
 };
 
