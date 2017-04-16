@@ -9,7 +9,7 @@
 void ItemLoader::init_items() {
     debug("Loading items....");
     Item *testItem = new Item(MODID, "testItem");
-    Item *testItem2 = new Item("base:testItem2", "testItem2");
+    Item *testItem2 = new Item(MODID, "testItem2");
 
     ItemRegistry::register_item(testItem);
     ItemRegistry::register_item(testItem2);
