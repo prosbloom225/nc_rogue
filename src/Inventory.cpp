@@ -5,14 +5,14 @@
 
 // Constructor
 Inventory::Inventory() {
-    items.push_back("test1");
+    /* items.push_back("test1"); */
 }
 
 // Dealloc
 Inventory::~Inventory(){
 }
 
-std::vector<std::string> *Inventory::get_items() {
+std::vector<Item> *Inventory::get_items() {
     return &items;
 }
 

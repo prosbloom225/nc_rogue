@@ -106,8 +106,10 @@ void Game::game_loop( Game &game, int ch) {
             /* main_char.inv()->activate_menu(); */
 
             /* scr.activate_panel(PANEL_MAIN); */
-            std::vector<std::string> *b = main_char.inv()->get_items();
-            log_info("%s",b->at(0).c_str());
+            std::vector<Item> *b = main_char.inv()->get_items();
+            if (b->size() > 0) {
+                log_info("%s",b->at(0).get_id().c_str());
+            }
 
 
 

@@ -5,14 +5,15 @@
 #include <stdlib.h>
 #include <vector>
 #include <string>
+#include "Item.h"
 
 class IInventory {
     private:
-        std::vector<std::string> items;
+        std::vector<Item> items;
 
     public:
         virtual ~IInventory() = default;
-        virtual std::vector<std::string> *get_items() = 0;
+        virtual std::vector<Item> *get_items() = 0;
 };
 
 
