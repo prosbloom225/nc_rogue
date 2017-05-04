@@ -5,6 +5,12 @@
 #include "Item.h"
 #include <map>
 
+struct cmpItemPair {
+    bool operator() (const std::string* a, const std::string* b) const {
+        return a == b;
+    }
+};
+
 class ItemRegistry {
     private:
         static std::map<std::string*, Item*> registry;

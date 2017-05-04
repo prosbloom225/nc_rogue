@@ -7,7 +7,9 @@
 Inventory::Inventory() {
     // TODO - seeding initial player inventory
     Item *a = ItemRegistry::get_item(new std::string("nc_rogue:testItem"));
-    /* debug("Seeding inventory with item: %s", a->get_name()->c_str()); */
+    ItemRegistry::dump_items();
+    debug("Seeding inventory with item: %s", a->get_name()->c_str());
+    /* items.push_back(*a); */
 }
 
 // Dealloc

@@ -4,8 +4,8 @@ std::map<std::string*, Item*> ItemRegistry::registry;
 
 bool ItemRegistry::register_item(Item *item){ 
     debug("%s", item->get_id()->c_str());
-    /* registry.insert(std::make_pair(item->get_id(), item)); */
-    registry.emplace(item->get_id(), item);
+    registry.insert(std::pair<std::string*, Item*>(item->get_id(), item));
+    /* registry.emplace(item->get_id(), item); */
     // TODO - return codes
     return true;
 } 
@@ -24,10 +24,25 @@ void ItemRegistry::dump_items() {
 
 Item* ItemRegistry::get_item(std::string *id) {
     // TODO - full table scan - ick
+    log_info("Size of registry: %lu", ItemRegistry::registry.size());
 
-    debug("Size of registry: %lu", ItemRegistry::registry.size());
-    Item *t= ItemRegistry::registry.find(id)->second;
-    return t;
-    /* return nullptr; */
+    for (auto f : ItemRegistry::registry) {
+        if (id->compare( *f.first) == 0) {
+            log_info("ITEM FOUND: %s - %s", id->c_str(), f.first->c_str());
+            return f.second;
+        }
+    }
+    return nullptr;
+
+    /*
+    auto search = ItemRegistry::registry.find(id);//new std::string("nc_rogue:testItem"));
+    if (search != ItemRegistry::registry.end()) {
+        log_info("Item found in registry: %s", id->c_str());
+        return search->second;
+    } else {
+        log_info("Item not found in registry: %s", id->c_str());
+        return nullptr;
+    }
+    */
 }
 
