@@ -14,6 +14,8 @@ class IInventory {
     public:
         virtual ~IInventory() = default;
         virtual std::vector<Item> *get_items() = 0;
+        virtual Item *get_item_at_pos(int pos) = 0;
+        virtual int get_size() = 0;
 };
 
 

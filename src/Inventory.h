@@ -14,6 +14,9 @@ class Inventory : public IInventory {
         ~Inventory();
 
         std::vector<Item> *get_items();
+        int get_size();
+
+        Item *get_item_at_pos(int pos);
 
 
 };

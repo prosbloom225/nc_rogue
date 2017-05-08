@@ -18,13 +18,53 @@ WINDOW *InventoryView::generate_window(){
     box(win, '*', '*');
     return win;
 }
-void InventoryView::activate_menu(WINDOW *win, IInventory *inventory) {
+void InventoryView::activate_menu(WINDOW *win, IInventory *inv) {
     /* wattron(win, A_STANDOUT); */
+    /* wattroff(win, A_STANDOUT); */
     /* mvwprintw(win, 1, 1, "TEST"); */
-    log_info("Size: %lu", inventory->get_items()->size());
-    for (int i=0; i < inventory->get_items()->size(); i++) {
-        mvwprintw(win, i+1, 1, "TEST_ITEM");
+    log_info("Size of inventory: %lu", inv->get_items()->size());
+    for (int i=0; i < inv->get_size(); i++) {
+        if (i ==0) {
+            wattron(win, A_STANDOUT);
+        } else {
+            wattroff(win, A_STANDOUT);
+        }
+        mvwprintw(win, i+1, 1, inv 
+                ->get_item_at_pos(i)
+                ->get_name()
+                ->c_str());
     }
+
+    // main menu loop
     Screen::srefresh();
-    getch();
+    int ch = 0, i=0;
+    while ((ch = getch()) != 'q') {
+        // clear current row formatting
+        wattroff(win, A_STANDOUT);
+        mvwprintw(win, i+1, 1, inv
+                ->get_item_at_pos(i)
+                ->get_name()
+                ->c_str());
+        switch (ch) {
+            // Up
+            case 'k':
+                log_info("Up hit");
+                i--;
+                i = (i<0) ? inv->get_size()-1 : i;
+                break;
+                // Down
+            case 'j':
+                log_info("Down hit");
+                wattron(win, A_STANDOUT);
+                i++;
+                i = (i>inv->get_size()-1) ? 0 : i;
+                break;
+        }
+        wattron(win, A_STANDOUT);
+        mvwprintw(win, i+1, 1, inv
+                ->get_item_at_pos(i)
+                ->get_name()
+                ->c_str());
+        Screen::srefresh();
+    }
 }
