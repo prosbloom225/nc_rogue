@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-std=c++11 -Wall -g  -Wno-unused-variable
+CFLAGS=-std=c++11 -Wall -g  -Wno-unused-variable -O0
 INC=-I./src
 LIB=-lncurses -lpanel -lmenu
 SRCDIR=src
